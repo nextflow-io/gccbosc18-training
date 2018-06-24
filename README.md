@@ -6,21 +6,23 @@ This repository contains the tutorial material for the [Nextflow training at GCC
 
 ## Prerequisite
 
+* Unix-like OS (Linux, macOS, etc.)
 * Java 8 or later 
-* Docker engine 1.10.x (or higher) 
+* Docker engine 1.10.x (or later) 
 * Singularity 2.3.x (optional)
 * AWS Batch computing environment property configured (optional)
+* [Graphviz](http://www.graphviz.org/) (optional)
    
 ## Installation 
 
 Install Nextflow by using the following command: 
 
 ```
-curl -fsSL get.nextflow.io | bash
+curl -fsSL https://get.nextflow.io | bash
 ```
     
 The above snippet creates the `nextflow` launcher in the current directory. 
-Complete the installation moving it into a directory on your `PATH` eg: 
+Complete the installation moving it into a directory in your `PATH` environment variable, e.g.: 
 
 ```
 mv nextflow $HOME/bin
@@ -169,7 +171,7 @@ nextflow run script3.nf
 It will print an output similar to the one shown below:
 
 ```
-[ggal_gut, [/../data/ggal/gut_1.fq, /../data/ggal/gut_2.fq]]
+[ggal_gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
 ```
 
 The above example shows how the `read_pairs_ch` channel emits tuples composed by 
@@ -217,19 +219,12 @@ by the `read_pairs_ch` channel.
 Execute it by using the following command: 
 
 ```
-nextflow run script4.nf 
+nextflow run script4.nf -resume
 ```
 
-You will see the execution of a `quantication` process. 
+You will see the execution of the `quantification` process. 
 
-Execute it again adding the `-resume` option as shown below: 
-
-```
-nextflow run script4.nf -resume 
-```
-
-The `-resume` option skips the execution of any step that has been processed in a previous 
-execution. 
+The `-resume` option cause the execution of any step that has been already processed to be skipped. 
 
 Try to execute it with more read files as shown below: 
 
@@ -247,7 +242,7 @@ to your script.
 #### Exercise 4.1 
 
 Add a [tag](https://www.nextflow.io/docs/latest/process.html#tag) directive to the 
-`quantification` process to provide a more readable execution log .
+`quantification` process to provide a more readable execution log.
 
 
 #### Exercise 4.2 
@@ -356,7 +351,6 @@ for details.
 
 ### Step 8 - Custom scripts
 
-
 Real world pipelines use a lot of custom user scripts (BASH, R, Python, etc). Nextflow 
 allows you to use and manage all these scripts in consistent manner. Simply put them 
 in a directory named `bin` in the pipeline project root. They will be automatically added 
@@ -376,7 +370,7 @@ mkdir fastqc_${sample_id}_logs
 fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
 ```
 
-Save it, grant the execute permission and move it in the `bin` directory as shown below: 
+Save it, give execute permission and move it in the `bin` directory as shown below: 
 
 ```
 chmod +x fastqc.sh
@@ -394,7 +388,6 @@ the following code:
     """  
 ```
 
-
 Run it as before: 
 
 ```
@@ -407,7 +400,6 @@ In this step you have learned:
 
 1. How to write or use existing custom script in your Nextflow pipeline.
 2. How to avoid the use of absolute paths having your scripts in the `bin/` project folder.
-
 
 
 ### Step 9 - Executors  
@@ -427,12 +419,12 @@ process.executor = 'slurm'
 process.queue = 'short'
 process.memory = '10 GB' 
 process.time = '30 min'
-process.cpus = 8 
+process.cpus = 4 
 ```
 
 The above configuration specify the use of the SLURM batch scheduler to run the 
 jobs spawned by your pipeline script. Then it specifies to use the `short` queue (partition), 
-10 gigabyte of memory and 8 cpus per job, and each job can run for no more than 30 minutes. 
+10 gigabyte of memory and 4 CPUs per job, and each job can run for no more than 30 minutes. 
 
 Note: the pipeline must be executed in a shared file system accessible to all the computing 
 nodes. 
@@ -585,8 +577,59 @@ Nextflow streamline this process enabling dead-easy interoperability between the
 container runtime. To run a containerized script replace the `docker.enabled = true` 
 with the `singularity.enabled = true` setting. 
 
+## Conda/Bioconda packages
+
+Conda is popular package and environment manager. The built-in support for Conda
+allows Nextflow pipelines to automatically creates and activates the Conda 
+environment(s) given the dependencies specified by each process. 
+
+To use a Conda environment with Nextflow specify it as a command line option
+as shown below: 
+
+```
+nextflow run script7.nf -with-conda env.yml
+```
+
+The use of a Conda environment can also be provided in the configuration file 
+adding the following setting in the `nextflow.config` file: 
+
+```
+process.conda = "env.yml"
+```
+
+See the [Nextflow](https://www.nextflow.io/docs/latest/conda.html) 
+in the Nextflow documentation for details.
+
+## Metrics and reports 
+
+Nextflow is able to produce multiple reports and charts providing several runtime metrics 
+and execution information. 
+
+Run the [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) pipeline
+previously introduced as shown below: 
+
+```
+nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
+```
+
+The `-with-report` option enables the creation of the workflow execution report. Open 
+the file `report.html` with a browser to see the report created with the above command. 
+
+The `-with-trace` option enables the create of a tab separated file containing runtime 
+information for each executed task. Check the content of the file `trace.txt` for an example.
+
+The `-with-timeline` option enables the creation of the workflow timeline report showing 
+how processes where executed along time. This may be useful to identify most time consuming 
+tasks and bottlenecks. See an example at [this link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report). 
+
+Finally the `-with-dag` option enables to rendering of the workflow execution direct acyclic graph 
+representation. Note: this feature requires the installation of [Graphviz](http://www.graphviz.org/) in your computer. 
+See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for details.
+
+Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
+
 ## More resources 
 
-* [Nextflow documentation](http://docs.nextflow.io)
-* [Nextflow patterns](https://github.com/nextflow-io/patterns)
-* [Awesome nextflow](https://github.com/nextflow-io/awesome-nextflow/)
+* [Nextflow documentation](http://docs.nextflow.io) - The Nextflow docs home.
+* [Nextflow patterns](https://github.com/nextflow-io/patterns) - A collection of Nextflow implementation patterns.
+* [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - An Variant calling pipeline implementing GATK best practices. 

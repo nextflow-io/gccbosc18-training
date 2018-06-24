@@ -41,7 +41,7 @@ process index {
 
 Channel 
     .fromFilePairs( params.reads )
-    .ifEmpty { error "Cannot find any reads matching: ${params.reads}"  }
+    .ifEmpty { error "Oops! Cannot find any file matching: ${params.reads}"  }
     .into { read_pairs_ch; read_pairs2_ch } 
 
 process quantification {
