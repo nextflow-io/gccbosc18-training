@@ -38,7 +38,7 @@ conda install nextflow
 Finally, clone this repository with the following command: 
 
 ```
-git clone https://github.com/nextflow-io/hack17-tutorial.git && cd gccbosc18-tutorial
+git clone https://github.com/nextflow-io/gccbosc18-training.git && cd gccbosc18-training
 ```
 
 ## Nextflow hands-on 
@@ -536,7 +536,7 @@ https://github.com/nextflow-io/rnaseq-nf
 You can run it by specifying the project name as shown below: 
 
 ```
-nextflow run nextflow-io/rnaseq
+nextflow run nextflow-io/rnaseq-nf -with-docker
 ```
 
 It automatically downloads it and store in the `$HOME/.nextflow` folder. 
@@ -544,7 +544,7 @@ It automatically downloads it and store in the `$HOME/.nextflow` folder.
 Use the command `info` to show the project information, e.g.: 
 
 ```
-nextflow info nextflow-io/rnaseq
+nextflow info nextflow-io/rnaseq-nf
 ```
 
 Nextflow allows the execution of a specific *revision* of your project by using the `-r` 
