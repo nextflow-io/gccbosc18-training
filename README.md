@@ -9,8 +9,8 @@ This repository contains the tutorial material for the [Nextflow training at GCC
 * Unix-like OS (Linux, macOS, etc.)
 * Java 8 or later 
 * Docker engine 1.10.x (or later) 
-* Singularity 2.3.x (optional)
-* AWS Batch computing environment property configured (optional)
+* Singularity 2.3.x (or later, optional)
+* AWS Batch computing environment properly configured (optional)
 * [Graphviz](http://www.graphviz.org/) (optional)
    
 ## Installation 
