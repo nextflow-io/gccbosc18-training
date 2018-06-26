@@ -633,3 +633,4 @@ Note: runtime metrics may be incomplete for run short running tasks as in the ca
 * [Nextflow documentation](http://docs.nextflow.io) - The Nextflow docs home.
 * [Nextflow patterns](https://github.com/nextflow-io/patterns) - A collection of Nextflow implementation patterns.
 * [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - An Variant calling pipeline implementing GATK best practices. 
+* [nf-core](http://nf-co.re/) - A community collection of production ready genomic pipelines. 
