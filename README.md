@@ -4,6 +4,21 @@
 
 This repository contains the tutorial material for the [Nextflow training at GCC/BOSC 2018](https://gccbosc2018.sched.com/event/DnAi/command-line-workflow-management-systems-snakemake-and-nextflow). 
 
+## Nextflow in a nutshell 
+
+A workflow engine for data analysis pipelines with a string focus on: 
+* Portability 
+* Reproducibility 
+* Scalability 
+* Usability 
+
+How? 
+* Functional/reactive programming model 
+* Decoupling and tasks isolation 
+* Concise DSL for recurrent task operations 
+* Hide complexity
+* Coexists with errors (!) 
+
 ## Prerequisite
 
 * Unix-like OS (Linux, macOS, etc.)
