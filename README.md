@@ -15,7 +15,8 @@ A workflow engine for data analysis pipelines with a string focus on:
 How? 
 * Functional/reactive programming model 
 * Decoupling and tasks isolation 
-* Concise DSL for recurrent task operations 
+* Concise DSL for recurrent task operations
+* Pragmatic, allows quick prototyping and iterations 
 * Hide complexity
 * Coexists with errors (!) 
 
