@@ -649,3 +649,10 @@ Note: runtime metrics may be incomplete for run short running tasks as in the ca
 * [Nextflow patterns](https://github.com/nextflow-io/patterns) - A collection of Nextflow implementation patterns.
 * [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - An Variant calling pipeline implementing GATK best practices. 
 * [nf-core](http://nf-co.re/) - A community collection of production ready genomic pipelines. 
+
+## NF workshop ! 
+
+We are organising a Nextflow workshop on November 22-23, '18 in Barcelona. For details and registration [check it out here](http://www.crg.eu/en/event/coursescrg-nextflow-reproducible-silico-genomics-0).
+
+
+![NF workshop poster](img/nf-hack18.png)
